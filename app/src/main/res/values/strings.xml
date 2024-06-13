@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">LectorQR</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="forgot_password">¿Has olvidado tu contraseña?</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="new_user">¿Nuevo usuario?</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="logotipo_description">Logotipo de la Municipalidad de San Isidro</string>
+
+    <string name="scanner_explication">Acerca la imagen del <b>código QR</b> a una distancia razonable para poder escanearla.</string>
+    <string name="form_code">Código</string>
+    <string name="form_anio">Año</string>
+    <string name="search">BUSCAR</string>
+
 </resources>
