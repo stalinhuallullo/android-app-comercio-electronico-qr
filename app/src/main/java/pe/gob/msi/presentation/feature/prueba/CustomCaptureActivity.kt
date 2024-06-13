@@ -1,8 +1,6 @@
-package pe.gob.msi.presentation.feature.camera
+package pe.gob.msi.presentation.feature.prueba
 
 import android.os.Bundle
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.CaptureActivity
@@ -10,17 +8,13 @@ import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import pe.gob.msi.R
 
-class CameraQrActivity : CaptureActivity() {
-    private lateinit var barcodeView: DecoratedBarcodeView
+class CustomCaptureActivity : CaptureActivity() {
 
+    private lateinit var barcodeView: DecoratedBarcodeView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera_qr)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
+        setContentView(R.layout.activity_custom_capture)
+
 
         barcodeView = findViewById(R.id.zxing_barcode_scanner)
         barcodeView.barcodeView.decoderFactory = DefaultDecoderFactory()
@@ -55,4 +49,5 @@ class CameraQrActivity : CaptureActivity() {
         super.onPause()
         barcodeView.pause()
     }
+
 }

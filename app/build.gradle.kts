@@ -42,7 +42,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0") { isTransitive = false }
+    implementation("androidx.activity:activity-ktx:1.2.3")
+    //implementation("com.google.zxing:core:4.3.0")
+    implementation("com.github.yuriy-budiyev:code-scanner:2.3.2")
 }

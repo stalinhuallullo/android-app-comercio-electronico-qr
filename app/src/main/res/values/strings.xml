@@ -13,4 +13,11 @@
     <string name="form_anio">Año</string>
     <string name="search">BUSCAR</string>
 
+
+    <string name="etiqueta_codigo">Código:</string>
+    <string name="etiqueta_formato">Tipo de código:</string>
+    <string name="caption_scanner">QR Code Scanner TAYLOR</string>
+    <string name="etiqueta_button1">Con ZXing</string>
+    <string name="etiqueta_button2">Con Code Scanner</string>
+
 </resources>
