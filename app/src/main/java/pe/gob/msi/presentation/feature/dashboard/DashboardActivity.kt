@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -15,16 +17,19 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 import pe.gob.msi.R
-import pe.gob.msi.presentation.feature.searchResult.SearchResultActivity
+import pe.gob.msi.presentation.base.LoadingView
 import pe.gob.msi.presentation.feature.SearchForCodeActivity
+import pe.gob.msi.presentation.feature.noPage.EmptyResultActivity
 import pe.gob.msi.presentation.feature.prueba.CustomCaptureActivity
+import pe.gob.msi.presentation.feature.searchResult.SearchResultActivity
 import pe.gob.msi.presentation.utils.Tools
 
-class DashboardActivity : AppCompatActivity(), View.OnClickListener {
+class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingView {
     private lateinit var toolbar: Toolbar
     private lateinit var btnQueryCamara: CardView
     private lateinit var btnQueryForm: CardView
     private lateinit var scanQrResultLauncher : ActivityResultLauncher<Intent>
+    var viewLoading: View? = null
 
     //var nav_view: NavigationView? = null
     //var drawer: DrawerLayout? = null
@@ -68,24 +73,28 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener {
         btnQueryCamara = findViewById(R.id.btnQueryCamara)
         btnQueryForm = findViewById(R.id.btnQueryForm)
     }
-    fun initClickListener(){
+    private fun initClickListener(){
         btnQueryCamara.setOnClickListener(this)
         btnQueryForm.setOnClickListener(this)
     }
 
     private fun setupScanner() {
         scanQrResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode === RESULT_OK) {
-                val result = ScanIntentResult.parseActivityResult(
+            if (result.resultCode == RESULT_OK) {
+                val results = ScanIntentResult.parseActivityResult(
                     result.resultCode,
                     result.data
                 )
 
                 //this will be qr activity result
-                if (result.contents == null) {
+                if (results.contents == null) {
                     Toast.makeText(baseContext, "Cancelado", Toast.LENGTH_LONG).show()
                 } else {
-                    goToResult()
+                    showLoading()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        goToResult()
+                        hideLoading()
+                    }, 2000)
                     //messageText.text = result.contents
                     //messageFormat.text = result.formatName
                 }
@@ -93,9 +102,13 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun goToResult() {
+    private fun goToResult() {
         val intent = Intent(this, SearchResultActivity::class.java)
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    }
+
+    fun goToResultEmpty() {
+        val intent = Intent(this, EmptyResultActivity::class.java)
         startActivity(intent)
     }
 
@@ -122,6 +135,22 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intentFormulario)
             }
         }
+    }
+
+    override fun showLoading() {
+        if (viewLoading != null) {
+            viewLoading!!.visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideLoading() {
+        if (viewLoading != null) {
+            viewLoading!!.visibility = View.GONE
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }

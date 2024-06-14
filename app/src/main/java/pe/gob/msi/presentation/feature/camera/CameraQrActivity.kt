@@ -1,17 +1,18 @@
 package pe.gob.msi.presentation.feature.camera
 
 import android.os.Bundle
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.view.View
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.CaptureActivity
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import pe.gob.msi.R
+import pe.gob.msi.presentation.base.LoadingView
 
 class CameraQrActivity : CaptureActivity() {
     private lateinit var barcodeView: DecoratedBarcodeView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,8 @@ class CameraQrActivity : CaptureActivity() {
         barcodeView.initializeFromIntent(intent)
         barcodeView.decodeContinuous(callback)
     }
+
+
 
     private val callback = object : BarcodeCallback {
         override fun barcodeResult(result: BarcodeResult) {
@@ -55,4 +58,5 @@ class CameraQrActivity : CaptureActivity() {
         super.onPause()
         barcodeView.pause()
     }
+
 }
