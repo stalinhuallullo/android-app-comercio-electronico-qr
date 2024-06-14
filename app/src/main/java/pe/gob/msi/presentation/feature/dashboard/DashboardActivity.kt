@@ -19,6 +19,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 import pe.gob.msi.R
 import pe.gob.msi.presentation.base.LoadingView
 import pe.gob.msi.presentation.feature.SearchForCodeActivity
+import pe.gob.msi.presentation.feature.camera.CameraQrActivity
 import pe.gob.msi.presentation.feature.noPage.EmptyResultActivity
 import pe.gob.msi.presentation.feature.prueba.CustomCaptureActivity
 import pe.gob.msi.presentation.feature.searchResult.SearchResultActivity
@@ -29,7 +30,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     private lateinit var btnQueryCamara: CardView
     private lateinit var btnQueryForm: CardView
     private lateinit var scanQrResultLauncher : ActivityResultLauncher<Intent>
-    var viewLoading: View? = null
+    private lateinit var viewLoading: View
 
     //var nav_view: NavigationView? = null
     //var drawer: DrawerLayout? = null
@@ -38,13 +39,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
 
         initToolbar()
         initComponent()
@@ -70,8 +65,10 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     }
 
     private fun initComponent() {
+        viewLoading = findViewById(R.id.viewLoading)
         btnQueryCamara = findViewById(R.id.btnQueryCamara)
         btnQueryForm = findViewById(R.id.btnQueryForm)
+
     }
     private fun initClickListener(){
         btnQueryCamara.setOnClickListener(this)
@@ -92,9 +89,9 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
                 } else {
                     showLoading()
                     Handler(Looper.getMainLooper()).postDelayed({
-                        goToResult()
                         hideLoading()
-                    }, 2000)
+                        goToResult()
+                    }, 3000)
                     //messageText.text = result.contents
                     //messageFormat.text = result.formatName
                 }
@@ -121,7 +118,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
                 options.setCameraId(0) // Use a specific camera of the device
                 options.setBeepEnabled(false)
                 options.setBarcodeImageEnabled(true)
-                options.captureActivity = CustomCaptureActivity::class.java
+                options.captureActivity = CameraQrActivity::class.java
                 scanQrResultLauncher.launch(
                     ScanContract().createIntent(baseContext, options )
                 )

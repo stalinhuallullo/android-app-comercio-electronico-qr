@@ -68,9 +68,5 @@
             android:background="@color/blue_300"/>
     </LinearLayout>
 
-    <include
-        android:id="@+id/view_loading"
-        layout="@layout/view_loading"
-        android:visibility="gone" />
 
 </RelativeLayout>

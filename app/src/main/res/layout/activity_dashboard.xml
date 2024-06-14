@@ -31,7 +31,8 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/include_main" />
-
+        <include layout="@layout/view_loading" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
