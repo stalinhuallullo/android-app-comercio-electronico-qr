@@ -9,6 +9,19 @@ import pe.gob.msi.data.net.service.impl.LicenseService
 class LicenseViewModel : ViewModel() {
     private val licenseService = LicenseService()
     private val _liveData = MutableLiveData<HttpResponseLicense>()
-    val LicenseLiveData: LiveData<HttpResponseLicense> = _liveData
+    val licenseLiveData: LiveData<HttpResponseLicense> = _liveData
+
+    fun findByCodeLicense(code: String) {
+        licenseService.findByCodeLicense(code)
+            .subscribe({ response ->
+                _liveData.value = response
+            }, { error ->
+                _liveData.value = HttpResponseLicense(
+                    CodigoRespuesta = "99",
+                    TXTRESPUESTA = "Network Error: ${error.message}",
+                    Datos = null
+                )
+            })
+    }
 
 }

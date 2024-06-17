@@ -67,7 +67,7 @@ dependencies {
     implementation(retrofitDependency)
     implementation(gsonDependency)
     implementation(adapterRxjavaDependency)
-
+    implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
 
 
     implementation("com.journeyapps:zxing-android-embedded:4.3.0") { isTransitive = false }

@@ -57,7 +57,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_hotel_name"
+                                android:id="@+id/tvTradeName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="@dimen/spacing_medium"
@@ -133,7 +133,7 @@
                                         android:textColor="@color/grey_80" />
 
                                     <TextView
-                                        android:id="@+id/tv_checkin_date"
+                                        android:id="@+id/tvDistrict"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="San Isidro"
@@ -177,7 +177,7 @@
                                         android:textColor="@color/grey_80" />
 
                                     <TextView
-                                        android:id="@+id/tv_checkout_date"
+                                        android:id="@+id/tvProvince"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Lima"
@@ -226,7 +226,7 @@
                                     android:textColor="@color/grey_80" />
 
                                 <TextView
-                                    android:id="@+id/tv_night"
+                                    android:id="@+id/tvDepartment"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Lima"
@@ -273,6 +273,7 @@
                                 android:textColor="@color/grey_80" />
 
                             <TextView
+                                android:id="@+id/tvSituatedIn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Calle LAS BEGONIAS N° 0429 INT. 01 MODULO A 1ER PISO"
@@ -314,6 +315,7 @@
 
 
                         <TextView
+                            android:id="@+id/tvRequestedBy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="INVERSIONES NACIONALES DE TURISMO S.A."
@@ -367,7 +369,7 @@
                                     android:textColor="@color/grey_80" />
 
                                 <TextView
-
+                                    android:id="@+id/tvMaximumBuildingCapacity"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="03 (TRES) PERSONAS"
@@ -412,7 +414,7 @@
                                     android:textColor="@color/grey_80" />
 
                                 <TextView
-
+                                    android:id="@+id/tvTwistOrActivity"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="CAFETERIA"
@@ -464,6 +466,7 @@
                                         android:textColor="@color/grey_80" />
 
                                     <TextView
+                                        android:id="@+id/tvOccupiedArea"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="5.24 m2"
@@ -507,6 +510,7 @@
                                         android:textColor="@color/grey_80" />
 
                                     <TextView
+                                        android:id="@+id/tvCoveredArea"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="5.24 m2"
@@ -556,6 +560,7 @@
                                     android:textColor="@color/grey_80" />
 
                                 <TextView
+                                    android:id="@+id/tvFileNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="7135/2024"
@@ -602,9 +607,57 @@
                                     android:textColor="@color/grey_80" />
 
                                 <TextView
+                                    android:id="@+id/tvResolutionNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="2448-2024-12.3.0-SLAC-GDUE/MSI"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                    android:textColor="@color/overlay_dark_70"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/spacing_large" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_medium"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="@dimen/spacing_medium"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:background="@color/yellow_A400" />
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="VIGENCIA"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                    android:textColor="@color/grey_80" />
+
+                                <TextView
+                                    android:id="@+id/tvValidity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2 años"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/overlay_dark_70"
                                     android:textStyle="bold" />
@@ -669,6 +722,7 @@
                                         android:textColor="@color/grey_80" />
 
                                     <TextView
+                                        android:id="@+id/tvExpeditionDate"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="24/05/2024"
@@ -712,6 +766,7 @@
                                         android:textColor="@color/grey_80" />
 
                                     <TextView
+                                        android:id="@+id/tvDateOfExpiry"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="10/04/2026"
@@ -760,6 +815,7 @@
                                     android:textColor="@color/grey_80" />
 
                                 <TextView
+                                    android:id="@+id/tvRenewalRequestDate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="24/05/2026"

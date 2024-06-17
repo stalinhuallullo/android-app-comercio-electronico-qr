@@ -1,4 +1,4 @@
-package pe.gob.msi.presentation.base
+package pe.gob.msi.presentation.base.mvp
 
 interface LoadingView {
     /**

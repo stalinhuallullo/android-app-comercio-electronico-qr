@@ -10,8 +10,9 @@ import io.reactivex.rxjava3.core.Observable
 class LicenseService: ILicenseService {
 
     private val apiService: ILicenseService = RestApi.retrofitInstance!!.create(ILicenseService::class.java)
-    override fun findByCodeLicense(data: String): Observable<HttpResponseLicense> {
-        return apiService.findByCodeLicense(data)
+
+    override fun findByCodeLicense(code: String): Observable<HttpResponseLicense> {
+        return apiService.findByCodeLicense(code)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

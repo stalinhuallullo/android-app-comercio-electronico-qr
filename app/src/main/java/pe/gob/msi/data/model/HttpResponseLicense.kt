@@ -6,7 +6,7 @@ import java.util.ArrayList
 
 data class HttpResponseLicense (
     val CodigoRespuesta: String?,
-    val Respuesta: String?,
+    val TXTRESPUESTA: String?,
     val Datos: ArrayList<License>?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -18,7 +18,7 @@ data class HttpResponseLicense (
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(CodigoRespuesta)
-        parcel.writeString(Respuesta)
+        parcel.writeString(TXTRESPUESTA)
         parcel.writeTypedList(Datos)
     }
 

@@ -1,18 +1,25 @@
 package pe.gob.msi.presentation.feature.camera
 
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.CaptureActivity
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import pe.gob.msi.R
-import pe.gob.msi.presentation.base.LoadingView
+import pe.gob.msi.data.model.HttpResponseLicense
+import pe.gob.msi.data.net.viewmodel.LicenseViewModel
+import pe.gob.msi.presentation.base.mvp.View
+import pe.gob.msi.presentation.utils.Tools
+import javax.inject.Inject
 
 class CameraQrActivity : CaptureActivity() {
     private lateinit var barcodeView: DecoratedBarcodeView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,12 +30,13 @@ class CameraQrActivity : CaptureActivity() {
             insets
         }*/
 
+
         barcodeView = findViewById(R.id.zxing_barcode_scanner)
         barcodeView.barcodeView.decoderFactory = DefaultDecoderFactory()
         barcodeView.initializeFromIntent(intent)
         barcodeView.decodeContinuous(callback)
+        //presenter.findByCodeLicense("2020-000004")
     }
-
 
 
     private val callback = object : BarcodeCallback {
@@ -37,6 +45,9 @@ class CameraQrActivity : CaptureActivity() {
             if (result.text != null) {
                 // Haz algo con el resultado del escaneo, por ejemplo, mostrarlo en un TextView
                 // Puedes enviar el resultado de vuelta a la actividad principal
+
+                Toast.makeText(this@CameraQrActivity, "QR => ${result.text}", Toast.LENGTH_LONG).show()
+                println("QR ======> ${result.text}")
                 val intent = intent
                 intent.putExtra("SCAN_RESULT", result.text)
                 setResult(RESULT_OK, intent)
@@ -58,5 +69,7 @@ class CameraQrActivity : CaptureActivity() {
         super.onPause()
         barcodeView.pause()
     }
+
+
 
 }

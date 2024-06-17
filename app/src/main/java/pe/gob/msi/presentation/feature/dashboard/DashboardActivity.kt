@@ -17,12 +17,12 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 import pe.gob.msi.R
-import pe.gob.msi.presentation.base.LoadingView
+import pe.gob.msi.presentation.base.mvp.LoadingView
 import pe.gob.msi.presentation.feature.SearchForCodeActivity
 import pe.gob.msi.presentation.feature.camera.CameraQrActivity
 import pe.gob.msi.presentation.feature.noPage.EmptyResultActivity
-import pe.gob.msi.presentation.feature.prueba.CustomCaptureActivity
 import pe.gob.msi.presentation.feature.searchResult.SearchResultActivity
+import pe.gob.msi.presentation.utils.Constants
 import pe.gob.msi.presentation.utils.Tools
 
 class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingView {
@@ -31,6 +31,8 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     private lateinit var btnQueryForm: CardView
     private lateinit var scanQrResultLauncher : ActivityResultLauncher<Intent>
     private lateinit var viewLoading: View
+
+    private lateinit var codeSearch: String
 
     //var nav_view: NavigationView? = null
     //var drawer: DrawerLayout? = null
@@ -78,20 +80,28 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     private fun setupScanner() {
         scanQrResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
+                showLoading()
+
                 val results = ScanIntentResult.parseActivityResult(
                     result.resultCode,
                     result.data
                 )
 
-                //this will be qr activity result
                 if (results.contents == null) {
+                    hideLoading()
                     Toast.makeText(baseContext, "Cancelado", Toast.LENGTH_LONG).show()
                 } else {
-                    showLoading()
+                    /*showLoading()
                     Handler(Looper.getMainLooper()).postDelayed({
                         hideLoading()
                         goToResult()
-                    }, 3000)
+                    }, 3000)*/
+                    println("results ===> $results")
+                    println("result.data ===> ${result.data}")
+                    println("result.resultCode ===> ${result.resultCode}")
+                    codeSearch = result.data.toString()
+                        goToResult()
+                    hideLoading()
                     //messageText.text = result.contents
                     //messageFormat.text = result.formatName
                 }
@@ -99,8 +109,30 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
         }
     }
 
+    private fun goToReadQr() {
+        val options = ScanOptions()
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+        options.setPrompt("Acerca la imagen del código QR a una distancia razonable para poder escanearla.")
+        options.setCameraId(0) // Use a specific camera of the device
+        options.setBeepEnabled(false)
+        options.setBarcodeImageEnabled(true)
+        options.captureActivity = CameraQrActivity::class.java
+        scanQrResultLauncher.launch(
+            ScanContract().createIntent(baseContext, options )
+        )
+    }
+    private fun goToFormSearch(){
+        val intentFormulario = Intent(
+            applicationContext,
+            SearchForCodeActivity::class.java
+        ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intentFormulario)
+    }
+
+
     private fun goToResult() {
         val intent = Intent(this, SearchResultActivity::class.java)
+        intent.putExtra(Constants.SEARCH_KEY, codeSearch)
         startActivity(intent)
     }
 
@@ -112,24 +144,11 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btnQueryCamara -> {
-                val options = ScanOptions()
-                options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
-                options.setPrompt("Acerca la imagen del código QR a una distancia razonable para poder escanearla.")
-                options.setCameraId(0) // Use a specific camera of the device
-                options.setBeepEnabled(false)
-                options.setBarcodeImageEnabled(true)
-                options.captureActivity = CameraQrActivity::class.java
-                scanQrResultLauncher.launch(
-                    ScanContract().createIntent(baseContext, options )
-                )
+                goToReadQr()
             }
 
             R.id.btnQueryForm -> {
-                val intentFormulario = Intent(
-                    applicationContext,
-                    SearchForCodeActivity::class.java
-                ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                startActivity(intentFormulario)
+                goToFormSearch()
             }
         }
     }
