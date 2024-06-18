@@ -47,6 +47,10 @@
                     android:layout_height="150dp"
                     android:src="@drawable/logosplash" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_mlarge" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,6 +92,7 @@
                     android:visibility="visible"
                     app:cardCornerRadius="1dp"
                     app:cardElevation="2dp"
+                    android:background="?android:attr/selectableItemBackground"
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -135,6 +140,7 @@
                     android:visibility="visible"
                     app:cardCornerRadius="1dp"
                     app:cardElevation="2dp"
+                    android:background="?android:attr/selectableItemBackground"
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout

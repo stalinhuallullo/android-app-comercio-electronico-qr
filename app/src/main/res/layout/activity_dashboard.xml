@@ -25,13 +25,10 @@
             android:background="@color/transparent"
             android:fitsSystemWindows="true"
             android:outlineSpotShadowColor="@color/transparent">
-
             <include layout="@layout/toolbar_simple" />
-
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/include_main" />
-        <include layout="@layout/view_loading" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

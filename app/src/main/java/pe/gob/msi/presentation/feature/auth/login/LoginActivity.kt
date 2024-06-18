@@ -6,11 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.ProgressBar
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
 import pe.gob.msi.R
 import pe.gob.msi.presentation.feature.dashboard.DashboardActivity
@@ -46,7 +43,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Handler(Looper.getMainLooper()).postDelayed({
                     progressBar.setVisibility(View.GONE)
                     btnLogin.setVisibility(View.VISIBLE)
-                    Snackbar.make(parentView, "Login data submitted", Snackbar.LENGTH_SHORT).show()
+                    //Snackbar.make(parentView, "Login data submitted", Snackbar.LENGTH_SHORT).show()
 
                     val intent = Intent(this, DashboardActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

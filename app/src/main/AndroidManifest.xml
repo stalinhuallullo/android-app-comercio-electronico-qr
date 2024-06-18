@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.feature.SearchForCodeActivity"
+            android:name=".presentation.feature.form.SearchForCodeActivity"
             android:exported="false" />
         <!--
 <activity

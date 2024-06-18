@@ -3,20 +3,18 @@ package pe.gob.msi.presentation.feature.searchResult
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import pe.gob.msi.R
 import pe.gob.msi.data.model.HttpResponseLicense
-import pe.gob.msi.data.net.viewmodel.LicenseViewModel
-import pe.gob.msi.presentation.feature.noPage.EmptyResultActivity
+import pe.gob.msi.presentation.feature.dashboard.DashboardActivity
+import pe.gob.msi.presentation.utils.Constants
 import pe.gob.msi.presentation.utils.Tools
 
 class SearchResultActivity : AppCompatActivity() {
@@ -39,31 +37,31 @@ class SearchResultActivity : AppCompatActivity() {
     private lateinit var tvDateOfExpiry: TextView
     private lateinit var tvRenewalRequestDate: TextView
 
-    private lateinit var viewModel: LicenseViewModel
     private var licensesHttp: HttpResponseLicense? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
         setContentView(R.layout.activity_result)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
 
         initToolbar()
         initComponent()
         initClickListener()
-        getData()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            licensesHttp = intent.getParcelableExtra(Constants.SEARCH_KEY, HttpResponseLicense::class.java)
+        } else {
+            licensesHttp = intent.getParcelableExtra(Constants.SEARCH_KEY)
+        }
+
+        if(licensesHttp != null) showDataLicense()
     }
 
 
 
     private fun initToolbar() {
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        //toolbar.setNavigationIcon(R.drawable.ic_notes)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.navigationIcon?.colorFilter = PorterDuffColorFilter(resources.getColor(R.color.grey_60, theme), PorterDuff.Mode.SRC_ATOP)
         toolbar.setBackgroundColor(resources.getColor(R.color.white, theme))
@@ -73,9 +71,24 @@ class SearchResultActivity : AppCompatActivity() {
 
         supportActionBar!!.title = "Resultado"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         Tools.setSystemBarColor(this, R.color.white)
         Tools.setSystemBarLight(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                goToHome()
+                finish()
+                //toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+            }
+            else -> {
+                Toast.makeText(applicationContext, item.title, Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initComponent() {
@@ -123,28 +136,9 @@ class SearchResultActivity : AppCompatActivity() {
             tvRenewalRequestDate.text = license!!.FECRENOVACION
         }
     }
-    private fun getData(){
-        println("011111111111")
-        viewModel = ViewModelProvider(this)[LicenseViewModel::class.java]
-        println("022222222222")
-        viewModel.licenseLiveData.observe(this) { response ->
-            response?.let {
-                if (it.CodigoRespuesta == "01" && it.TXTRESPUESTA == "Exito") {
-                    licensesHttp = it
-                    showDataLicense()
-                } else {
-                    // Error, handle the error message
-                    //Toast.makeText(this, "ERROR ===> ${it.Respuesta}", Toast.LENGTH_SHORT).show()
-                    goToResultEmpty()
-                }
-            }
-        }
-        println("033333333333")
-        // Call your API
-        viewModel.findByCodeLicense("2020-000004")
-    }
-    fun goToResultEmpty() {
-        val intent = Intent(this, EmptyResultActivity::class.java)
+
+    fun goToHome() {
+        val intent = Intent(this, DashboardActivity::class.java)
         startActivity(intent)
     }
 

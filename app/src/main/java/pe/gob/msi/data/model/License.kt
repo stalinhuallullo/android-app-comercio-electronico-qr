@@ -35,7 +35,7 @@ data class License(
     var CODRIESGO: String? = null,
     var CODRIESGO2: String? = null,
     var TXTNOMBRE: String? = null,
-    var FECNOTIFICACION: String? = null,
+    var FECNOTIFICACION: String? = null
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
