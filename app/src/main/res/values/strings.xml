@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LectorQR</string>
+    <string name="app_name">Comercio electrónico QR</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
     <string name="forgot_password">¿Has olvidado tu contraseña?</string>

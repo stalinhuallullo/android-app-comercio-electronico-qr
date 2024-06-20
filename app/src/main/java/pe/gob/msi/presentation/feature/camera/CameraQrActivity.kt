@@ -1,6 +1,8 @@
 package pe.gob.msi.presentation.feature.camera
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
@@ -9,6 +11,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
@@ -17,6 +21,7 @@ import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import pe.gob.msi.R
 import pe.gob.msi.data.model.HttpResponseLicense
 import pe.gob.msi.data.net.viewmodel.LicenseViewModel
+import pe.gob.msi.presentation.feature.dashboard.DashboardActivity
 import pe.gob.msi.presentation.feature.noPage.EmptyResultActivity
 import pe.gob.msi.presentation.feature.searchResult.SearchResultActivity
 import pe.gob.msi.presentation.utils.Constants
@@ -32,14 +37,28 @@ class CameraQrActivity : AppCompatActivity() {
     private lateinit var viewModel: LicenseViewModel
     private var licensesHttp: HttpResponseLicense? = null
 
+    private val CAMERA_PERMISSION_CODE = 100
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_qr)
 
+        // Inicializar componentes si los permisos ya están concedidos
         initToolbar()
         initComponent()
         initClickListener()
+
+        // Solicitar permisos de cámara e internet si no están concedidos
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.INTERNET), CAMERA_PERMISSION_CODE)
+        } else {
+            // Inicializar componentes si los permisos ya están concedidos
+            initToolbar()
+            initComponent()
+            initClickListener()
+        }
     }
 
     private fun initToolbar() {
@@ -91,7 +110,7 @@ class CameraQrActivity : AppCompatActivity() {
         }
     }
 
-    fun goToResultEmpty() {
+    private fun goToResultEmpty() {
         val intent = Intent(this, EmptyResultActivity::class.java)
         startActivity(intent)
     }
@@ -138,6 +157,24 @@ class CameraQrActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         barcodeView.pause()
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permisos concedidos, inicializar componentes
+                initToolbar()
+                initComponent()
+                initClickListener()
+            } else {
+                // Permisos denegados, redirigir a PermissionDeniedActivity
+                val intent = Intent(this, DashboardActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
