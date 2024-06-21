@@ -5,26 +5,34 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import pe.gob.msi.R
 import pe.gob.msi.presentation.base.mvp.LoadingView
+import pe.gob.msi.presentation.feature.auth.login.LoginActivity
 import pe.gob.msi.presentation.feature.form.SearchForCodeActivity
 import pe.gob.msi.presentation.feature.camera.CameraQrActivity
 import pe.gob.msi.presentation.feature.noPage.EmptyResultActivity
+import pe.gob.msi.presentation.utils.SessionManager
 import pe.gob.msi.presentation.utils.Tools
 
 class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingView {
     private lateinit var toolbar: Toolbar
     private lateinit var btnQueryCamara: CardView
     private lateinit var btnQueryForm: CardView
+    private lateinit var tvUserName: TextView
+    private lateinit var btnLogout: AppCompatButton
     private lateinit var scanQrResultLauncher : ActivityResultLauncher<Intent>
     private lateinit var viewLoading: View
+
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,11 +64,18 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     private fun initComponent() {
         btnQueryCamara = findViewById(R.id.btnQueryCamara)
         btnQueryForm = findViewById(R.id.btnQueryForm)
+        tvUserName = findViewById(R.id.tvUserName)
+        btnLogout = findViewById(R.id.btnLogout)
 
+        sessionManager = SessionManager(this)
+        val user = sessionManager.getUserSession()
+        tvUserName.text = user?.name
     }
+
     private fun initClickListener(){
         btnQueryCamara.setOnClickListener(this)
         btnQueryForm.setOnClickListener(this)
+        btnLogout.setOnClickListener(this)
     }
 
     private fun setupScanner() {
@@ -99,6 +114,12 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
 
             R.id.btnQueryForm -> {
                 goToFormSearch()
+            }
+            R.id.btnLogout -> {
+                sessionManager.clearSession()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }

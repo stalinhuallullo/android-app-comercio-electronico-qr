@@ -6,6 +6,8 @@ import pe.gob.msi.data.net.service.ILicenseService
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import pe.gob.msi.data.model.User
+import pe.gob.msi.data.net.service.IAuthService
 
 class LicenseService: ILicenseService {
 
