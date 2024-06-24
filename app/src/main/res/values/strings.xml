@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Comercio electrónico QR</string>
+    <string name="drawer_user">Taylor Swift</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
     <string name="forgot_password">¿Has olvidado tu contraseña?</string>

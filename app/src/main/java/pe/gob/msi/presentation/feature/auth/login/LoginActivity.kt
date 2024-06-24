@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
         Tools.setSystemBarColor(this, R.color.white)
         Tools.setSystemBarLight(this)
     }
+
     private fun initComponent() {
         parentView = findViewById(android.R.id.content)
         btnLogin = findViewById(R.id.btnLogin)

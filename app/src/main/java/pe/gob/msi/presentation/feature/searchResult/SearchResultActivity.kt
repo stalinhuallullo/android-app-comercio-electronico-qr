@@ -119,19 +119,19 @@ class SearchResultActivity : AppCompatActivity() {
         if(licensesHttp != null){
             val license = licensesHttp?.Datos?.get(0)
             tvTradeName.text = license!!.TXTNOMBRECOMERCIAL
-            tvDistrict.text = "--"
-            tvProvince.text = "--"
-            tvDepartment.text = "--"
-            tvSituatedIn.text = "--"
-            tvRequestedBy.text = "--"
-            tvMaximumBuildingCapacity.text = "--"
+            //tvDistrict.text = "--"
+            //tvProvince.text = "--"
+            //tvDepartment.text = "--"
+            tvSituatedIn.text = license!!.TXTDOMICILIO
+            tvRequestedBy.text = license!!.TXTRAZONSOCIAL
+            tvMaximumBuildingCapacity.text = license!!.TXTAFORO
             tvTwistOrActivity.text = license!!.TXTGIRO
             tvOccupiedArea.text = license!!.NUMAREA
             tvCoveredArea.text = license!!.NUMAREATECHADA
             tvFileNo.text = license!!.TXTEXPEDIENTE
             tvResolutionNo.text = license!!.TXTRESOLUCION
             tvValidity.text = "--"
-            tvExpeditionDate.text = "--"
+            tvExpeditionDate.text = license!!.FECEMISION
             tvDateOfExpiry.text = license!!.FECCADUCIDAD
             tvRenewalRequestDate.text = license!!.FECRENOVACION
         }

@@ -29,6 +29,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="App.Shop.DrawerStyle" parent="AppTheme">
+        <item name="colorControlHighlight">@android:color/transparent</item>
+    </style>
+
     <style name="Button.Primary" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/colorPrimary</item>
         <item name="android:textColor">@android:color/white</item>

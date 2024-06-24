@@ -14,11 +14,9 @@ class LoginPresenter(
     override fun login(email: String, password: String, rememberMe: Boolean) {
         view.showLoading()
         repository.login(email, password)
-            //.subscribeOn(Schedulers.io())
-            //.observeOn(AndroidSchedulers.mainThread())
             .subscribe({ user ->
                 view.hideLoading()
-                sessionManager.saveUserSession(user, rememberMe)
+                sessionManager.saveUserSession(user.Datos!!.get(0), rememberMe)
                 view.navigateToUserActivity()
             }, { throwable ->
                 view.hideLoading()

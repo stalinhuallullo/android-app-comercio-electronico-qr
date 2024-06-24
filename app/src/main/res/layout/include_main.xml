@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:background="@color/green_900">
+        android:background="@color/green_msi">
 
         <ImageView
             android:layout_width="match_parent"
@@ -37,20 +37,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="100dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/logosplash" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/spacing_mlarge" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,6 +49,20 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textColor="@color/grey_50"
                     android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_mlarge" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/logosplash" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_mlarge" />
+
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
@@ -67,6 +70,18 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:text="Taylor Swift"
+                    android:textSize="15sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="@color/grey_50"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:text="GTIC"
+                    android:textSize="12sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textColor="@color/grey_50"
                     android:textStyle="bold" />
@@ -189,7 +204,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_middle" />
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_xmedium"
@@ -205,7 +220,7 @@
                     android:text="Cerrar Sesión"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white" />
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
 
