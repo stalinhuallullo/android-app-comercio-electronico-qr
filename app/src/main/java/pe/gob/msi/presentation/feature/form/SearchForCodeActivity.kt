@@ -6,12 +6,14 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.SnackbarLayout
@@ -20,6 +22,7 @@ import pe.gob.msi.R
 import pe.gob.msi.data.model.HttpResponseLicense
 import pe.gob.msi.data.net.viewmodel.LicenseViewModel
 import pe.gob.msi.presentation.common.utils.OnSingleClickListener
+import pe.gob.msi.presentation.feature.dashboard.DashboardActivity
 import pe.gob.msi.presentation.feature.noPage.EmptyResultActivity
 import pe.gob.msi.presentation.feature.searchResult.SearchResultActivity
 import pe.gob.msi.presentation.utils.Constants
@@ -55,7 +58,7 @@ class SearchForCodeActivity : AppCompatActivity() {
         toolbar.navigationIcon?.colorFilter = PorterDuffColorFilter(resources.getColor(R.color.grey_60, theme), PorterDuff.Mode.SRC_ATOP)
         toolbar.setBackgroundColor(resources.getColor(R.color.white, theme))
         toolbar.setTitleTextColor(resources.getColor(R.color.black, theme))
-        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        //toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         setSupportActionBar(toolbar)
 
         supportActionBar!!.title = "Buscar por código"
@@ -80,13 +83,6 @@ class SearchForCodeActivity : AppCompatActivity() {
         btnSearch.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
                 validateData()
-                /*Toast.makeText(this@SearchForCodeActivity, "ssssssss", Toast.LENGTH_LONG).show()
-                showProgress()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    Toast.makeText(this@SearchForCodeActivity, "delay 2000", Toast.LENGTH_LONG).show()
-
-                    hiddenProgress()
-                }, 2000)*/
             }
         })
     }
@@ -109,16 +105,12 @@ class SearchForCodeActivity : AppCompatActivity() {
             if (response.CodigoRespuesta == "01" && response.TXTRESPUESTA == "Exito" && response.Datos?.size!! > 0) {
                 licensesHttp = response
                 goToResult()
-                finish()
             } else {
-                //goToResultEmpty()
                 snackBarIconInfo("No se encontro resultado. \r\nIntenta nuevamente")
             }
-
             hiddenProgress()
-
         }
-        viewModel.findByCodeLicense("$anio-$code")
+        viewModel.findByCodeLicense("$code-$anio")
     }
 
     private fun goToResultEmpty() {
@@ -132,6 +124,15 @@ class SearchForCodeActivity : AppCompatActivity() {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP // Ensure only one instance
         }
         startActivity(intent)
+        finish()
+    }
+
+    private fun goToRDashboard() {
+        val intent = Intent(this, DashboardActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP // Ensure only one instance
+        }
+        startActivity(intent)
+        finish()
     }
 
     private fun showProgress() {
@@ -178,6 +179,17 @@ class SearchForCodeActivity : AppCompatActivity() {
         )
         snackBarView.addView(custom_view, 0)
         snackbar.show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                goToRDashboard()
+
+                //return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /*override fun onClick(v: View) {

@@ -10,6 +10,9 @@ interface ILicenseService {
     //@GET(value = "/WSITSE/ListarItseCertificado?IDCERTIFICADO={code}")
     //fun findByCodeLicense(@Path("code") code: String) : Observable<HttpResponseLicense>
     @GET("/WSITSE/ListarItseCertificado")
-    fun findByCodeLicense(@Query("IDCERTIFICADO") code: String) : Observable<HttpResponseLicense>
+    fun findByIdLicense(@Query("IDCERTIFICADO") code: String) : Observable<HttpResponseLicense>
+
+    @GET("/WSITSE/ListarItseCertificadoResolucion")
+    fun findByCodeLicense(@Query("IDRESOLUCION") code: String) : Observable<HttpResponseLicense>
 
 }

@@ -61,7 +61,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
         toolbar.navigationIcon?.colorFilter = PorterDuffColorFilter(resources.getColor(R.color.grey_60, theme), PorterDuff.Mode.SRC_ATOP)
         toolbar.setBackgroundColor(resources.getColor(R.color.white, theme))
         toolbar.setTitleTextColor(resources.getColor(R.color.black, theme))
-        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        //toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         setSupportActionBar(toolbar)
 
         supportActionBar!!.title = "Inicio"

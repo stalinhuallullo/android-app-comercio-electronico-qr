@@ -19,6 +19,7 @@ import pe.gob.msi.databinding.ActivityLoginBinding
 import pe.gob.msi.presentation.feature.dashboard.DashboardActivity
 import pe.gob.msi.presentation.utils.SessionManager
 import pe.gob.msi.presentation.utils.Tools
+import java.util.Locale
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.View {
 
@@ -86,7 +87,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
                 val rememberMe = binding.cbRememberMe.isChecked
 
                 if (validateInputs(email, password)) {
-                    loginPresenter.login(email, password, rememberMe)
+                    loginPresenter.login(email.uppercase(Locale.ROOT), password, rememberMe)
                 }
 
                 /*progressBar.visibility = View.VISIBLE

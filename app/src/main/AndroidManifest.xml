@@ -30,19 +30,7 @@
             android:name=".presentation.feature.searchResult.SearchResultActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
-        <activity
-            android:name=".presentation.feature.prueba.ZxingActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".presentation.feature.prueba.CameraPruebaActivity"
-            android:exported="false" />
-        <!--
-<activity
-            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="fullSensor"
-            tools:ignore="DiscouragedApi"
-            tools:replace="screenOrientation" />
-        -->
+
         <activity
             android:name=".presentation.feature.camera.CameraQrActivity"
             android:exported="false"
@@ -59,11 +47,6 @@
             android:name=".presentation.feature.form.SearchForCodeActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
-        <!--
-<activity
-            android:name=".presentation.feature.camera.CameraQrActivity"
-            android:exported="false" />
-        -->
         <activity
             android:name=".presentation.feature.auth.login.LoginActivity"
             android:windowSoftInputMode="adjustResize"

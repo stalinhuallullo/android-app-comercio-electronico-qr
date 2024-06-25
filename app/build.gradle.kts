@@ -82,6 +82,4 @@ dependencies {
     implementation("com.github.yuriy-budiyev:code-scanner:2.3.2")
 
     implementation(libs.javax.inject)
-
-
 }

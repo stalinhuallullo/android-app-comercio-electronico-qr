@@ -106,7 +106,7 @@ class CameraQrActivity : AppCompatActivity() {
 
         override fun possibleResultPoints(resultPoints: List<com.google.zxing.ResultPoint>) {
             // Handle possible result points if necessary
-            println("resultPoints ============> $resultPoints")
+            println("resultPoints ============>")
         }
     }
 
@@ -138,7 +138,7 @@ class CameraQrActivity : AppCompatActivity() {
             hiddenProgress()
             finish()
         }
-        viewModel.findByCodeLicense(code)
+        viewModel.findByIdLicense(code)
     }
 
     private fun showProgress() {
@@ -176,14 +176,21 @@ class CameraQrActivity : AppCompatActivity() {
             }
         }
     }
-
+    private fun goToRDashboard() {
+        val intent = Intent(this, DashboardActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP // Ensure only one instance
+        }
+        startActivity(intent)
+        finish()
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> {
-                toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+                //toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+                goToRDashboard()
             }
             else -> {
-                Toast.makeText(applicationContext, item.title, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, item.title, Toast.LENGTH_SHORT).show()
             }
         }
         return super.onOptionsItemSelected(item)

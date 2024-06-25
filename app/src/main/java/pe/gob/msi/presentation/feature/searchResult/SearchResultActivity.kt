@@ -21,6 +21,7 @@ class SearchResultActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     private lateinit var tvTradeName: TextView
+    private lateinit var tvLicense: TextView
     private lateinit var tvDistrict: TextView
     private lateinit var tvProvince: TextView
     private lateinit var tvDepartment: TextView
@@ -69,7 +70,7 @@ class SearchResultActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         setSupportActionBar(toolbar)
 
-        supportActionBar!!.title = "Resultado"
+        supportActionBar!!.title = "Licencia"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
@@ -93,6 +94,7 @@ class SearchResultActivity : AppCompatActivity() {
 
     private fun initComponent() {
         tvTradeName = findViewById(R.id.tvTradeName)
+        tvLicense = findViewById(R.id.tvLicense)
         tvDistrict = findViewById(R.id.tvDistrict)
         tvProvince = findViewById(R.id.tvProvince)
         tvDepartment = findViewById(R.id.tvDepartment)
@@ -118,7 +120,11 @@ class SearchResultActivity : AppCompatActivity() {
     private fun showDataLicense() {
         if(licensesHttp != null){
             val license = licensesHttp?.Datos?.get(0)
+            //supportActionBar!!.title = "Licencia ${license!!.TXTCERTIFICADODC}"
+
             tvTradeName.text = license!!.TXTNOMBRECOMERCIAL
+            tvLicense.text = license!!.TXTGLOSACERTIFICADO
+
             //tvDistrict.text = "--"
             //tvProvince.text = "--"
             //tvDepartment.text = "--"

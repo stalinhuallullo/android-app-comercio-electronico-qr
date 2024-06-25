@@ -12,6 +12,11 @@ import pe.gob.msi.data.net.service.IAuthService
 class LicenseService: ILicenseService {
 
     private val apiService: ILicenseService = RestApi.retrofitInstance!!.create(ILicenseService::class.java)
+    override fun findByIdLicense(code: String): Observable<HttpResponseLicense> {
+        return apiService.findByIdLicense(code)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 
     override fun findByCodeLicense(code: String): Observable<HttpResponseLicense> {
         return apiService.findByCodeLicense(code)
