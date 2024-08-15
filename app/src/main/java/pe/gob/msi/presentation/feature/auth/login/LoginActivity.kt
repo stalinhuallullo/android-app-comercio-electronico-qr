@@ -2,17 +2,15 @@ package pe.gob.msi.presentation.feature.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatButton
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 import pe.gob.msi.R
-import pe.gob.msi.data.net.service.IAuthService
 import pe.gob.msi.data.net.service.impl.AuthService
 import pe.gob.msi.data.repository.UserRepository
 import pe.gob.msi.databinding.ActivityLoginBinding
@@ -34,10 +32,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_login)
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         initToolbar()
         initComponent()
@@ -57,21 +54,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
 
         sessionManager = SessionManager(this)
 
-        if (sessionManager.isLoggedIn()) {
-            navigateToUserActivity()
-        }
+        if (sessionManager.isLoggedIn()) { navigateToUserActivity() }
 
         loginPresenter = LoginPresenter(this, UserRepository(AuthService()), sessionManager)
-
-        /*binding.btnLogin.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
-            val rememberMe = binding.cbRememberMe.isChecked
-
-            if (validateInputs(email, password)) {
-                loginPresenter.login(email, password, rememberMe)
-            }
-        }*/
     }
     private fun initClickListener() {
         // event clicks
@@ -80,8 +65,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.btnLogin->{
-
+            R.id.btnLogin -> {
                 val email = binding.etEmail.text.toString()
                 val password = binding.etPassword.text.toString()
                 val rememberMe = binding.cbRememberMe.isChecked
@@ -89,30 +73,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
                 if (validateInputs(email, password)) {
                     loginPresenter.login(email.uppercase(Locale.ROOT), password, rememberMe)
                 }
-
-                /*progressBar.visibility = View.VISIBLE
-                btnLogin.visibility = View.GONE
-                Handler(Looper.getMainLooper()).postDelayed({
-                    progressBar.setVisibility(View.GONE)
-                    btnLogin.setVisibility(View.VISIBLE)
-                    //Snackbar.make(parentView, "Login data submitted", Snackbar.LENGTH_SHORT).show()
-
-                    val intent = Intent(this, DashboardActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(intent)
-                    finish()
-                }, 2000)*/
             }
         }
     }
 
-    /*******************************************************************/
-
-
     private fun validateInputs(email: String, password: String): Boolean {
         var isValid = true
         if (email.isEmpty()) {
-            binding.etEmail.error = "El correo electronico es requerido"
+            binding.etEmail.error = "El nombre de usuario es requerido"
             isValid = false
         }
         if (password.isEmpty()) {
@@ -138,7 +106,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
     }
 
     override fun navigateToUserActivity() {
-        val intent = Intent(this, DashboardActivity::class.java)
+        val intent = Intent( applicationContext, DashboardActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+
         startActivity(intent)
         finish()
     }
@@ -152,13 +122,20 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, LoginContract.V
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
         binding.etPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 binding.tvErrorMessage.visibility = View.GONE
             }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.tilPassword.endIconMode = when(s.isNullOrEmpty()) {
+                    true -> TextInputLayout.END_ICON_NONE
+                    false -> TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                }
+            }
         })
     }
 }

@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
+                android:text="@string/login_user_name"
                 android:textAlignment="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@color/green_msi"
@@ -78,13 +78,14 @@
                 android:textColor="@color/blue_grey_300"
                 android:theme="@style/EditText.Grey" />-->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-4dp"
                 android:layout_marginRight="-4dp"
                 android:textColorHint="@color/green_msi"
                 app:boxStrokeColor="@color/green_msi"
-                app:passwordToggleEnabled="true"
+                app:passwordToggleEnabled="false"
                 app:passwordToggleTint="@color/green_msi">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"

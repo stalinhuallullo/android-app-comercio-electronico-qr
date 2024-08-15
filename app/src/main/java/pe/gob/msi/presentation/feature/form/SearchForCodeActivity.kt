@@ -52,13 +52,11 @@ class SearchForCodeActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.navigationIcon?.colorFilter = PorterDuffColorFilter(resources.getColor(R.color.grey_60, theme), PorterDuff.Mode.SRC_ATOP)
         toolbar.setBackgroundColor(resources.getColor(R.color.white, theme))
         toolbar.setTitleTextColor(resources.getColor(R.color.black, theme))
-        //toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         setSupportActionBar(toolbar)
 
         supportActionBar!!.title = "Buscar por código"
@@ -111,11 +109,6 @@ class SearchForCodeActivity : AppCompatActivity() {
             hiddenProgress()
         }
         viewModel.findByCodeLicense("$code-$anio")
-    }
-
-    private fun goToResultEmpty() {
-        val intent = Intent(this, EmptyResultActivity::class.java)
-        startActivity(intent)
     }
 
     private fun goToResult() {

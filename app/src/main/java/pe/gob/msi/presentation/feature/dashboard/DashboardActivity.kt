@@ -21,6 +21,7 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import pe.gob.msi.R
 import pe.gob.msi.presentation.base.mvp.LoadingView
+import pe.gob.msi.presentation.feature.about.AboutActivity
 import pe.gob.msi.presentation.feature.auth.login.LoginActivity
 import pe.gob.msi.presentation.feature.camera.CameraQrActivity
 import pe.gob.msi.presentation.feature.form.SearchForCodeActivity
@@ -88,7 +89,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
         sessionManager = SessionManager(this)
         val user = sessionManager.getUserSession()
         tvUserName.text = user?.NOMBRE
-        tvArea.text = user?.AREA
+        tvArea.text = user?.AREANOMBRECORTO
 
 
         val headerView = navView.getHeaderView(0)
@@ -112,6 +113,45 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
         }
     }
 
+    private fun goToRenovacionComercioViaPublica() {
+        val options = ScanOptions()
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+        options.setPrompt("Acerca la camara al código QR")
+        options.setCameraId(0) // Use a specific camera of the device
+        options.setBeepEnabled(false)
+        options.setBarcodeImageEnabled(true)
+        options.captureActivity = CameraQrActivity::class.java
+        scanQrResultLauncher.launch(
+            ScanContract().createIntent(baseContext, options )
+        )
+    }
+
+    private fun goToLicenciaDeFuncionamiento() {
+        val options = ScanOptions()
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+        options.setPrompt("Acerca la camara al código QR")
+        options.setCameraId(0) // Use a specific camera of the device
+        options.setBeepEnabled(false)
+        options.setBarcodeImageEnabled(true)
+        options.captureActivity = CameraQrActivity::class.java
+        scanQrResultLauncher.launch(
+            ScanContract().createIntent(baseContext, options )
+        )
+    }
+
+    private fun goToCertificadoDeInspeccionTecnica() {
+        val options = ScanOptions()
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+        options.setPrompt("Acerca la camara al código QR")
+        options.setCameraId(0) // Use a specific camera of the device
+        options.setBeepEnabled(false)
+        options.setBarcodeImageEnabled(true)
+        options.captureActivity = CameraQrActivity::class.java
+        scanQrResultLauncher.launch(
+            ScanContract().createIntent(baseContext, options )
+        )
+    }
+
     private fun goToReadQr() {
         val options = ScanOptions()
         options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
@@ -125,7 +165,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
         )
     }
 
-    private fun goToFormSearch(){
+    private fun goToFormSearch() {
         val intentFormulario = Intent(
             applicationContext,
             SearchForCodeActivity::class.java
@@ -133,9 +173,20 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
         startActivity(intentFormulario)
     }
 
+    private fun goToAbout() {
+        val intent = Intent(
+            applicationContext,
+            AboutActivity::class.java
+        ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+    }
+
     private fun logout(){
         sessionManager.clearSession()
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(
+            applicationContext,
+            LoginActivity::class.java
+        ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
         finish()
     }
@@ -160,15 +211,11 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     }
 
     override fun showLoading() {
-        if (viewLoading != null) {
-            viewLoading!!.visibility = View.VISIBLE
-        }
+        viewLoading.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        if (viewLoading != null) {
-            viewLoading!!.visibility = View.GONE
-        }
+        viewLoading.visibility = View.GONE
     }
 
     override fun onDestroy() {
@@ -197,13 +244,28 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
            //drawer.closeDrawer(GravityCompat.START);
 
            when (menu.itemId) {
+               R.id.navRenovacionComercioViaPublica -> {
+                   goToRenovacionComercioViaPublica()
+                   //drawer.closeDrawer(GravityCompat.START);
+               }
+               R.id.navLicenciaDeFuncionamiento -> {
+                   goToLicenciaDeFuncionamiento()
+                   //drawer.closeDrawer(GravityCompat.START);
+               }
+               R.id.navCertificadoDeInspeccionTecnica -> {
+                   goToCertificadoDeInspeccionTecnica()
+                   //drawer.closeDrawer(GravityCompat.START);
+               }
                R.id.navLecturaQR -> {
                    goToReadQr()
-                   drawer.closeDrawer(GravityCompat.START);
+                   //drawer.closeDrawer(GravityCompat.START);
                }
                R.id.navConsulta -> {
                    goToFormSearch()
-                   drawer.closeDrawer(GravityCompat.START);
+                   //drawer.closeDrawer(GravityCompat.START);
+               }
+               R.id.navAbout -> {
+                   goToAbout()
                }
                R.id.navLogout -> {
                    logout()

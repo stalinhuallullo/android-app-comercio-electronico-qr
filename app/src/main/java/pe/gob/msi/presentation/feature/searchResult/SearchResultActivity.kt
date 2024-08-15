@@ -67,7 +67,6 @@ class SearchResultActivity : AppCompatActivity() {
         toolbar.navigationIcon?.colorFilter = PorterDuffColorFilter(resources.getColor(R.color.grey_60, theme), PorterDuff.Mode.SRC_ATOP)
         toolbar.setBackgroundColor(resources.getColor(R.color.white, theme))
         toolbar.setTitleTextColor(resources.getColor(R.color.black, theme))
-        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         setSupportActionBar(toolbar)
 
         supportActionBar!!.title = "Licencia"
@@ -136,7 +135,7 @@ class SearchResultActivity : AppCompatActivity() {
             tvCoveredArea.text = license!!.NUMAREATECHADA
             tvFileNo.text = license!!.TXTEXPEDIENTE
             tvResolutionNo.text = license!!.TXTRESOLUCION
-            tvValidity.text = "--"
+            //tvValidity.text = "--"
             tvExpeditionDate.text = license!!.FECEMISION
             tvDateOfExpiry.text = license!!.FECCADUCIDAD
             tvRenewalRequestDate.text = license!!.FECRENOVACION
@@ -144,7 +143,8 @@ class SearchResultActivity : AppCompatActivity() {
     }
 
     fun goToHome() {
-        val intent = Intent(this, DashboardActivity::class.java)
+        val intent = Intent( applicationContext, DashboardActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
     }
 

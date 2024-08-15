@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="¡Vaya!"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/green_msi"
                 android:textStyle="bold" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:text="No se encontraron resultados. Inténtalo de nuevo"
                 android:gravity="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/green_msi" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -58,7 +58,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xlarge"
-                android:background="@drawable/btn_rounded_blue"
+                android:background="@drawable/btn_rounded_green"
                 android:gravity="center"
                 android:text="@string/back_to_home"
                 android:textColor="@android:color/white" />

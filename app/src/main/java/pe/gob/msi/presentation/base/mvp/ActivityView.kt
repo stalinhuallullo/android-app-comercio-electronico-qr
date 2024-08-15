@@ -1,6 +1,6 @@
 package pe.gob.msi.presentation.base.mvp
 
-interface View {
+interface ActivityView {
     /**
      * Inicia la vista del tool bar
      */

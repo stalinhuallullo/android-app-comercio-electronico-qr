@@ -54,14 +54,16 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="@+id/ivTradeName"
+                            android:layout_toStartOf="@+id/ivTradeName">
 
                             <TextView
                                 android:id="@+id/tvTradeName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="@dimen/spacing_medium"
-                                android:text="TAKEAT"
+                                android:text="ALTAMESA ENERGY PERÚ SOCIEDAD ANONIMA CERRADA"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/overlay_dark_70"
                                 android:textStyle="bold" />
@@ -76,6 +78,7 @@
 
                         </LinearLayout>
                         <ImageView
+                            android:id="@+id/ivTradeName"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_alignParentEnd="true"

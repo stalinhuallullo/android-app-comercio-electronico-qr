@@ -1,11 +1,15 @@
 package pe.gob.msi.presentation.feature.noPage
 
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.Toolbar
 import pe.gob.msi.R
+import pe.gob.msi.presentation.feature.auth.login.LoginActivity
 import pe.gob.msi.presentation.feature.dashboard.DashboardActivity
 import pe.gob.msi.presentation.utils.Tools
 
@@ -16,9 +20,13 @@ class EmptyResultActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_empty_result)
 
+        initToolbar()
         initComponent()
         initClickListener()
-        Tools.setSystemBarColor(this, android.R.color.white)
+
+    }
+    private fun initToolbar() {
+        Tools.setSystemBarColor(this, R.color.white)
         Tools.setSystemBarLight(this)
     }
 
@@ -31,7 +39,8 @@ class EmptyResultActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun goToHome() {
-        val intent = Intent(this, DashboardActivity::class.java)
+        val intent = Intent( applicationContext, DashboardActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
     }
 

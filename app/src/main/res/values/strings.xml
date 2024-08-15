@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Comercio electrónico QR</string>
+    <string name="app_name">Licencia QR</string>
+    <!--<string name="app_name">Comercio electrónico QR</string>-->
     <string name="drawer_user">Taylor Swift</string>
+    <string name="login_user_name">Nombre de usuario</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
     <string name="forgot_password">¿Has olvidado tu contraseña?</string>
@@ -22,5 +24,21 @@
     <string name="etiqueta_button2">Con Code Scanner</string>
 
     <string name="back_to_home">Volver al inicio</string>
+
+    <string name="app_description">La aplicación tiene la funcionalidad de escaner el QR de las licencias de funcionamiento y realizar una busqueda por el codigo y año digitado en el documento.\nMuestra el resultado de una licencia despues de escanear </string>
+    <string name="term_of_services">Término de servicios</string>
+
+
+    <string name="qr_renewal_of_commerce_on_public_roads">Renovación del Comercio en la Vía Público</string>
+    <string name="qr_operating_license">Licencia de Funcionamiento</string>
+    <string name="qr_technical_inspection_certificate">Certificado de inspección técnica</string>
+    <string name="qr_reading">Lectura QR</string>
+    <string name="consultation">Consulta</string>
+
+    <string name="application_info">Info. de la aplicación</string>
+    <string name="logout">Cerrar Sesión</string>
+
+
+
 
 </resources>

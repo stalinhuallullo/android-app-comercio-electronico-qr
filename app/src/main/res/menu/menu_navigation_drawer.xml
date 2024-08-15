@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Páginas" >
+    <item android:title="Rols" >
         <menu>
             <group
                 android:id="@+id/grp_1"
@@ -14,15 +14,30 @@
                     app:tint="@android:color/white"
                     android:title="Inicio" />-->
                 <item
+                    android:id="@+id/navRenovacionComercioViaPublica"
+                    android:icon="@drawable/ic_reader_qr_colors"
+                    app:tint="@android:color/white"
+                    android:title="@string/qr_renewal_of_commerce_on_public_roads" />
+                <item
+                    android:id="@+id/navLicenciaDeFuncionamiento"
+                    android:icon="@drawable/ic_reader_qr_colors"
+                    app:tint="@android:color/white"
+                    android:title="@string/qr_operating_license" />
+                <item
+                    android:id="@+id/navCertificadoDeInspeccionTecnica"
+                    android:icon="@drawable/ic_reader_qr_colors"
+                    app:tint="@android:color/white"
+                    android:title="@string/qr_technical_inspection_certificate" />
+                <item
                     android:id="@+id/navLecturaQR"
                     android:icon="@drawable/ic_reader_qr_colors"
                     app:tint="@android:color/white"
-                    android:title="Lectura QR" />
+                    android:title="@string/qr_reading" />
                 <item
                     android:id="@+id/navConsulta"
                     android:icon="@drawable/ic_search_files"
                     android:tint="@android:color/black"
-                    android:title="Consulta" />
+                    android:title="@string/consultation" />
             </group>
         </menu>
     </item>
@@ -33,9 +48,13 @@
                 android:id="@+id/grp_2"
                 android:checkableBehavior="single">
                 <item
+                    android:id="@+id/navAbout"
+                    android:icon="@drawable/ic_perm_device_info"
+                    android:title="@string/application_info" />
+                <item
                     android:id="@+id/navLogout"
                     android:icon="@drawable/ic_logout"
-                    android:title="Cerrar Sesión" />
+                    android:title="@string/logout" />
             </group>
         </menu>
     </item>
