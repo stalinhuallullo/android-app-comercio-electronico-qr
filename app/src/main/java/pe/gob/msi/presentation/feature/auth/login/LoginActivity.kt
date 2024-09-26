@@ -15,6 +15,7 @@ import pe.gob.msi.data.net.service.impl.AuthService
 import pe.gob.msi.data.repository.UserRepository
 import pe.gob.msi.databinding.ActivityLoginBinding
 import pe.gob.msi.presentation.feature.dashboard.DashboardActivity
+import pe.gob.msi.presentation.feature.inicio.InicioActivity
 import pe.gob.msi.presentation.utils.SessionManager
 import pe.gob.msi.presentation.utils.Tools
 import java.util.Locale

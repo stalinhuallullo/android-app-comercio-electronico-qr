@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayout"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_10"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".presentation.feature.dashboard.DashboardActivity"
+    tools:context=".presentation.feature.inicio.InicioActivity"
     tools:openDrawer="start">
 
 
     <include
-        android:id="@+id/include_dashboard_main"
-        layout="@layout/app_dashboard_main"
+        android:id="@+id/app_bar_main"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

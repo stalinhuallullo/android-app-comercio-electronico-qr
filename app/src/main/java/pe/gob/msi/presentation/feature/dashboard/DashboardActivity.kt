@@ -11,15 +11,21 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import pe.gob.msi.R
+import pe.gob.msi.databinding.ActivityDashboardBinding
 import pe.gob.msi.presentation.base.mvp.LoadingView
 import pe.gob.msi.presentation.feature.about.AboutActivity
 import pe.gob.msi.presentation.feature.auth.login.LoginActivity
@@ -30,6 +36,10 @@ import pe.gob.msi.presentation.utils.Tools
 
 class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingView,
     NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityDashboardBinding
+
     private lateinit var toolbar: Toolbar
     private lateinit var btnQueryCamara: CardView
     private lateinit var btnQueryForm: CardView
@@ -47,10 +57,19 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_dashboard)
+        binding = ActivityDashboardBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        //setContentView(R.layout.activity_dashboard)
+
+        binding.includeDashboardMain.fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .setAnchorView(R.id.fab).show()
+        }
         initToolbar()
         initComponent()
+
         initClickListener()
         showDataSession()
         setupScanner()
@@ -150,6 +169,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
         scanQrResultLauncher.launch(
             ScanContract().createIntent(baseContext, options )
         )
+
     }
 
     private fun goToReadQr() {
@@ -240,40 +260,48 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener , LoadingVie
 
 
 
-       override fun onNavigationItemSelected(menu: MenuItem): Boolean {
-           //drawer.closeDrawer(GravityCompat.START);
+   override fun onNavigationItemSelected(menu: MenuItem): Boolean {
+       //drawer.closeDrawer(GravityCompat.START);
 
-           when (menu.itemId) {
-               R.id.navRenovacionComercioViaPublica -> {
-                   goToRenovacionComercioViaPublica()
-                   //drawer.closeDrawer(GravityCompat.START);
-               }
-               R.id.navLicenciaDeFuncionamiento -> {
-                   goToLicenciaDeFuncionamiento()
-                   //drawer.closeDrawer(GravityCompat.START);
-               }
-               R.id.navCertificadoDeInspeccionTecnica -> {
-                   goToCertificadoDeInspeccionTecnica()
-                   //drawer.closeDrawer(GravityCompat.START);
-               }
-               R.id.navLecturaQR -> {
-                   goToReadQr()
-                   //drawer.closeDrawer(GravityCompat.START);
-               }
-               R.id.navConsulta -> {
-                   goToFormSearch()
-                   //drawer.closeDrawer(GravityCompat.START);
-               }
-               R.id.navAbout -> {
-                   goToAbout()
-               }
-               R.id.navLogout -> {
-                   logout()
-
-               }
+       return when (menu.itemId) {
+           R.id.nav_renovacion -> {
+               //goToRenovacionComercioViaPublica()
+               binding.includeDashboardMain.includeMain.txtCategory.text = "Renovacion"
+               drawer.closeDrawer(GravityCompat.START);
+               true
            }
-
-           return false
+           R.id.nav_licencia -> {
+               //goToLicenciaDeFuncionamiento()
+               binding.includeDashboardMain.includeMain.txtCategory.text = "Licencia"
+               drawer.closeDrawer(GravityCompat.START);
+               true
+           }
+           R.id.nav_certificado -> {
+               //goToCertificadoDeInspeccionTecnica()
+               binding.includeDashboardMain.includeMain.txtCategory.text = "Certificado"
+               drawer.closeDrawer(GravityCompat.START);
+               true
+           }
+           /*R.id.navLecturaQR -> {
+               goToReadQr()
+               //drawer.closeDrawer(GravityCompat.START);
+           }
+           R.id.navConsulta -> {
+               goToFormSearch()
+               //drawer.closeDrawer(GravityCompat.START);
+           }*/
+           R.id.navAbout -> {
+               goToAbout()
+               true
+           }
+           R.id.navLogout -> {
+               logout()
+               true
+           }
+           else -> super.onOptionsItemSelected(menu)
        }
+
+       return false
+   }
 
 }

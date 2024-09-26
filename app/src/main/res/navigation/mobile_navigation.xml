@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_certificado">
+
+    <fragment
+        android:id="@+id/nav_certificado"
+        android:name="pe.gob.msi.presentation.feature.dashboard.ui.certificado.CertificadoFragment"
+        android:label="Certificado"
+        tools:layout="@layout/fragment_certificado" />
+
+    <fragment
+        android:id="@+id/nav_licencia"
+        android:name="pe.gob.msi.presentation.feature.dashboard.ui.licencia.LicenciaFragment"
+        android:label="Licencia"
+        tools:layout="@layout/fragment_licencia" />
+
+    <fragment
+        android:id="@+id/nav_renovacion"
+        android:name="pe.gob.msi.presentation.feature.dashboard.ui.renovacion.RenovacionFragment"
+        android:label="Renovacion"
+        tools:layout="@layout/fragment_renovacion" />
+</navigation>

@@ -14,30 +14,30 @@
                     app:tint="@android:color/white"
                     android:title="Inicio" />-->
                 <item
-                    android:id="@+id/navRenovacionComercioViaPublica"
+                    android:id="@+id/nav_renovacion"
                     android:icon="@drawable/ic_reader_qr_colors"
                     app:tint="@android:color/white"
                     android:title="@string/qr_renewal_of_commerce_on_public_roads" />
                 <item
-                    android:id="@+id/navLicenciaDeFuncionamiento"
+                    android:id="@+id/nav_licencia"
                     android:icon="@drawable/ic_reader_qr_colors"
                     app:tint="@android:color/white"
-                    android:title="@string/qr_operating_license" />
+                    android:title="@string/qr_operating_license"/>
                 <item
-                    android:id="@+id/navCertificadoDeInspeccionTecnica"
+                    android:id="@+id/nav_certificado"
                     android:icon="@drawable/ic_reader_qr_colors"
                     app:tint="@android:color/white"
                     android:title="@string/qr_technical_inspection_certificate" />
-                <item
+                <!--<item
                     android:id="@+id/navLecturaQR"
                     android:icon="@drawable/ic_reader_qr_colors"
                     app:tint="@android:color/white"
-                    android:title="@string/qr_reading" />
-                <item
+                    android:title="@string/qr_reading" />-->
+                <!--<item
                     android:id="@+id/navConsulta"
                     android:icon="@drawable/ic_search_files"
                     android:tint="@android:color/black"
-                    android:title="@string/consultation" />
+                    android:title="@string/consultation" />-->
             </group>
         </menu>
     </item>

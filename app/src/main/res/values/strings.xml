@@ -37,8 +37,11 @@
 
     <string name="application_info">Info. de la aplicación</string>
     <string name="logout">Cerrar Sesión</string>
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Taylor Swift</string>
+    <string name="nav_header_subtitle">Navigation header</string>
 
 
 </resources>
